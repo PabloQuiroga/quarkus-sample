@@ -16,6 +16,4 @@ class GreetingResourceTest {
              .statusCode(200)
              .body(is("Service is up!"));
     }
-
-
 }
