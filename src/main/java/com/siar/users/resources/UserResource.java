@@ -1,7 +1,7 @@
 package com.siar.users.resources;
 
-import com.siar.mappers.NoSuchElementExceptionMapper;
-import com.siar.users.models.UserDTO;
+import com.siar.dto.users.UpdateUserDto;
+import com.siar.users.models.UserEntity;
 import com.siar.users.services.UserService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -27,14 +27,14 @@ public class UserResource {
     //TODO remove. unsafe endpoint
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<UserDTO> getAll(){
+    public List<UserEntity> getAll(){
         return service.getAllUsers();
     }
 
     @GET
     @Path("/doc")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getByDoc(@QueryParam("document") int docNumber){
+    public Response getByDoc(@QueryParam("document") Integer docNumber){
         log.debug("get users by doc: {}", docNumber);
         return service.getByDoc(docNumber)
                 .map(value -> Response.ok(value).build())
@@ -45,16 +45,16 @@ public class UserResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response saveUser(UserDTO user){
-        service.saveUser(user);
-        return Response.created(URI.create(user.getFullName())).build();
+    public Response saveUser(UpdateUserDto dto){
+        var entity = service.saveUser(dto);
+        return Response.created(URI.create(entity.getFullName())).build();
     }
 
     @PUT
-    @Path("/{id}")
+    @Path("/{document}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateUser(@PathParam("id") long id, UserDTO u){
-        var result = service.update(id, u);
+    public Response updateUser(@PathParam("document") Integer docNumber, UpdateUserDto dto){
+        var result = service.update(docNumber, dto);
         return Response.ok(result).build();
     }
 }
