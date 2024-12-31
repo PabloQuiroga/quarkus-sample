@@ -1,7 +1,8 @@
 package com.siar.users.services;
 
-import com.siar.dto.users.UpdateUserDto;
-import com.siar.dto.users.UserMapper;
+import com.siar.dto.users.UserDto;
+import com.siar.mappers.UserMapper;
+import com.siar.mappers.exceptions.BadRequestCustomException;
 import com.siar.users.models.UserEntity;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -31,13 +32,17 @@ public class UserService {
         return repository.findByDocNumber(docNumber);
     }
 
-    public UserEntity saveUser(UpdateUserDto dto){
-        var entity = mapper.fromCreate(dto);
-        repository.persist(entity);
-        return entity;
+    public UserEntity saveUser(UserDto dto){
+        if(repository.findByDocNumber(dto.docNumber()).isEmpty()) {
+            var entity = mapper.fromCreate(dto);
+            repository.persist(entity);
+            return entity;
+        }
+
+        throw new BadRequestCustomException("imposible registrar la nueva entidad");
     }
 
-    public UserEntity update(Integer docNumber, UpdateUserDto dto) {
+    public UserEntity update(Integer docNumber, UserDto dto) {
         var entity = repository.findByDocNumber(docNumber);
         if (entity.isPresent()) {
             val fromUpdate = mapper.fromUpdate(dto, entity.get());
