@@ -1,11 +1,13 @@
 package com.siar.users.resources;
 
 import com.siar.dto.users.UserDto;
+import com.siar.commons.ValidationsGroups;
 import com.siar.users.models.UserEntity;
 import com.siar.users.services.UserService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import jakarta.validation.groups.ConvertGroup;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -46,7 +48,11 @@ public class UserResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response saveUser(@Valid UserDto dto){
+    public Response saveUser(
+            @ConvertGroup (to = ValidationsGroups.Post.class)
+            @Valid
+            UserDto dto
+    ){
         var entity = service.saveUser(dto);
         return Response.created(URI.create(String.valueOf(entity.getDocNumber()))).build();
     }
@@ -54,7 +60,12 @@ public class UserResource {
     @PUT
     @Path("/{document}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateUser(@PathParam("document") Integer docNumber, UserDto dto){
+    public Response updateUser(
+            @PathParam("document")
+            Integer docNumber,
+            @ConvertGroup (to = ValidationsGroups.Put.class)
+            @Valid
+            UserDto dto){
         var result = service.update(docNumber, dto);
         return Response.ok(result).build();
     }
