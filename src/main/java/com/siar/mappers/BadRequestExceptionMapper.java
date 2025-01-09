@@ -3,9 +3,11 @@ package com.siar.mappers;
 import com.siar.mappers.exceptions.BadRequestCustomException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
+import jakarta.ws.rs.ext.Provider;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Provider
 public class BadRequestExceptionMapper implements ExceptionMapper<BadRequestCustomException> {
     private static record BadRequestMessage(String message, String details){}
 

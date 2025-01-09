@@ -49,8 +49,7 @@ public class UserResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response saveUser(
-            @ConvertGroup (to = ValidationsGroups.Post.class)
-            @Valid
+            @Valid @ConvertGroup (to = ValidationsGroups.Post.class)
             UserDto dto
     ){
         var entity = service.saveUser(dto);
@@ -63,8 +62,7 @@ public class UserResource {
     public Response updateUser(
             @PathParam("document")
             Integer docNumber,
-            @ConvertGroup (to = ValidationsGroups.Put.class)
-            @Valid
+            @Valid @ConvertGroup(to = ValidationsGroups.Put.class)
             UserDto dto){
         var result = service.update(docNumber, dto);
         return Response.ok(result).build();
