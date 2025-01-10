@@ -10,11 +10,10 @@ import java.time.LocalDate;
 public record UserDto(
 
         @Positive(groups = ValidationsGroups.Post.class)
-        @NotNull(groups = ValidationsGroups.Put.class)
         int docNumber,
 
-        @NotBlank(groups = ValidationsGroups.Post.class)
-        @NotNull(groups = ValidationsGroups.Post.class)
+        @NotBlank
+        @NotNull
         String fullName,
 
         @NotNull(groups = ValidationsGroups.Post.class)

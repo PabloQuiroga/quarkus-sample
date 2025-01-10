@@ -22,6 +22,8 @@ dependencies {
     implementation("io.quarkus:quarkus-jdbc-h2")
     implementation("io.quarkus:quarkus-hibernate-orm-panache")
 
+    implementation("io.quarkus:quarkus-hibernate-validator")
+
     // lombok
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")

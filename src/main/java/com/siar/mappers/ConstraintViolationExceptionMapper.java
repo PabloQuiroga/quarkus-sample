@@ -1,9 +1,5 @@
 package com.siar.mappers;
 
-import jakarta.json.Json;
-import jakarta.json.JsonObject;
-import jakarta.json.JsonObjectBuilder;
-import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -17,16 +13,7 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
         return Response
                 .status(Response.Status.BAD_REQUEST)
                 .type(MediaType.APPLICATION_JSON_TYPE)
-                .entity(errorMessage(e))
+                .entity(e.getMessage())
                 .build();
-    }
-
-    private JsonObject errorMessage(ConstraintViolationException e) {
-        JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-
-        for (ConstraintViolation v : e.getConstraintViolations()) {
-            objectBuilder.add(v.getPropertyPath().toString(), v.getMessage());
-        }
-        return objectBuilder.build();
     }
 }
