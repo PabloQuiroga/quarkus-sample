@@ -1,6 +1,6 @@
 package com.siar.users.resources;
 
-import com.siar.dto.users.UserDto;
+import com.siar.dto.UserDto;
 import com.siar.commons.ValidationsGroups;
 import com.siar.users.models.UserEntity;
 import com.siar.users.services.UserService;

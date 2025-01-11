@@ -1,7 +1,7 @@
-package com.siar.mappers;
+package com.siar.commons.mappers;
 
 import com.siar.commons.ValidationsGroups;
-import com.siar.dto.users.UserDto;
+import com.siar.dto.UserDto;
 import com.siar.users.models.UserEntity;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.validation.Valid;

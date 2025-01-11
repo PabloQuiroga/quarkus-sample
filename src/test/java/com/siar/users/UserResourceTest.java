@@ -1,14 +1,12 @@
 package com.siar.users;
 
-import com.siar.dto.users.UserDto;
+import com.siar.dto.UserDto;
 import com.siar.users.models.UserEntity;
 import com.siar.users.resources.UserResource;
 import com.siar.users.services.UserRepository;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.common.http.TestHTTPEndpoint;
 import io.quarkus.test.junit.QuarkusTest;
-import jakarta.inject.Inject;
-import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

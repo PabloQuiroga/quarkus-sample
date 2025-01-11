@@ -1,4 +1,4 @@
-package com.siar.mappers;
+package com.siar.commons.mappers;
 
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;

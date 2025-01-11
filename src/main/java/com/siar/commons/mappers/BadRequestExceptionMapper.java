@@ -1,6 +1,6 @@
-package com.siar.mappers;
+package com.siar.commons.mappers;
 
-import com.siar.mappers.exceptions.BadRequestCustomException;
+import com.siar.commons.exceptions.BadRequestCustomException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;

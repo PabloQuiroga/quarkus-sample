@@ -1,4 +1,4 @@
-package com.siar.mappers.exceptions;
+package com.siar.commons.exceptions;
 
 public class BadRequestCustomException extends RuntimeException{
     public BadRequestCustomException(String message){

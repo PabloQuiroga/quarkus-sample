@@ -1,4 +1,4 @@
-package com.siar.dto.users;
+package com.siar.dto;
 
 import com.siar.commons.ValidationsGroups;
 import jakarta.validation.constraints.NotBlank;

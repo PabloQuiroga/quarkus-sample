@@ -1,8 +1,8 @@
 package com.siar.users.services;
 
-import com.siar.dto.users.UserDto;
-import com.siar.mappers.UserMapper;
-import com.siar.mappers.exceptions.BadRequestCustomException;
+import com.siar.dto.UserDto;
+import com.siar.commons.mappers.UserMapper;
+import com.siar.commons.exceptions.BadRequestCustomException;
 import com.siar.users.models.UserEntity;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

@@ -1,4 +1,4 @@
-package com.siar.mappers;
+package com.siar.commons.mappers;
 
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.core.MediaType;
