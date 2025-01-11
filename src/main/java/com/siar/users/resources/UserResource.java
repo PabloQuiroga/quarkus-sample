@@ -9,8 +9,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.groups.ConvertGroup;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.*;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,11 +52,13 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(description = "Save a new user")
     public Response saveUser(
+            @Context UriInfo uriInfo,
             @Valid @ConvertGroup (to = ValidationsGroups.Post.class)
             UserDto dto
     ){
         var entity = service.saveUser(dto);
-        return Response.created(URI.create(String.valueOf(entity.getDocNumber()))).build();
+        UriBuilder path = uriInfo.getAbsolutePathBuilder().path(String.valueOf(entity.getDocNumber()));
+        return Response.created(path.build()).build();
     }
 
     @PUT
