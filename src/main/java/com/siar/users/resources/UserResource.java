@@ -11,6 +11,7 @@ import jakarta.validation.groups.ConvertGroup;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +31,7 @@ public class UserResource {
     //TODO remove. unsafe endpoint
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(description = "Return all users if exists")
     public List<UserEntity> getAll(){
         return service.getAllUsers();
     }
@@ -37,6 +39,7 @@ public class UserResource {
     @GET
     @Path("/doc")
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(description = "Get users by document number if exists")
     public Response getByDoc(@QueryParam("document") Integer docNumber){
         log.debug("get users by doc: {}", docNumber);
         return service.getByDoc(docNumber)
@@ -48,6 +51,7 @@ public class UserResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(description = "Save a new user")
     public Response saveUser(
             @Valid @ConvertGroup (to = ValidationsGroups.Post.class)
             UserDto dto
@@ -59,6 +63,7 @@ public class UserResource {
     @PUT
     @Path("/{document}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Update a User by document number")
     public Response updateUser(
             @PathParam("document")
             Integer docNumber,
