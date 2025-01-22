@@ -10,13 +10,15 @@ import jakarta.validation.Valid;
 import jakarta.validation.groups.ConvertGroup;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
+import org.eclipse.microprofile.faulttolerance.Retry;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.TimeoutException;
 
 @Transactional
 @Path("/users")
@@ -51,6 +53,8 @@ public class UserResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(description = "Save a new user")
+    @Timeout(value = 500) //value default 1000
+    @Retry(retryOn = TimeoutException.class, delay = 100, jitter = 50) //max retry 3 por default
     public Response saveUser(
             @Context UriInfo uriInfo,
             @Valid @ConvertGroup (to = ValidationsGroups.Post.class)

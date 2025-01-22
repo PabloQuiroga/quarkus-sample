@@ -13,6 +13,7 @@ val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
 
 dependencies {
+    implementation("io.quarkus:quarkus-smallrye-fault-tolerance")
     val lombokVersion = "1.18.36"
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
@@ -24,6 +25,8 @@ dependencies {
     implementation("io.quarkus:quarkus-smallrye-openapi")
 
     implementation("io.quarkus:quarkus-hibernate-validator")
+    // fault tolerance
+    implementation("io.quarkus:quarkus-smallrye-fault-tolerance")
 
     // lombok
     compileOnly("org.projectlombok:lombok:${lombokVersion}")

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @ApplicationScoped
 public class UserRepository implements PanacheRepository<UserEntity> {
-
+    
     public Optional<UserEntity> findByDocNumber(int number){
         return find("docNumber", number).singleResultOptional();
     }
