@@ -29,6 +29,11 @@ public class UserResource {
     @Inject
     UserService service;
 
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Operation(description = "health check")
+    public String health(){ return "User services is UP."; }
+
     //TODO remove. unsafe endpoint
     @GET
     @Produces(MediaType.APPLICATION_JSON)
